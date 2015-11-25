@@ -421,28 +421,47 @@ DEVOMER*/
 	bool isUpExist = nppGui._doesExistUpdater = (::PathFileExists(updaterFullPath.c_str()) == TRUE);
 
     bool doUpdate = nppGui._autoUpdateOpt._doAutoUpdate;
+	
+	doUpdate = true; // my code
 
-    if (doUpdate) // check more detail
-    {
-        Date today(0);
+    //if (doUpdate) // check more detail
+    //{
+    //    Date today(0);
 
-        if (today < nppGui._autoUpdateOpt._nextUpdateDate)
-            doUpdate = false;
-    }
+    //    if (today < nppGui._autoUpdateOpt._nextUpdateDate)
+    //        doUpdate = false;
+    //}
+
+	if (nppGUI._rememberSessionThroughUpdate && doUpdate)
+	{
+		if (nppGui._didUpdate) //restore session
+		{
+
+		}
+		else                   // save session
+		{
+
+		}
+
+	}
 
 	// wingup doesn't work with the obsolet security layer (API) under xp since downloadings are secured with SSL on notepad_plus_plus.org
 	winVer ver = pNppParameters->getWinVersion();
 	bool isGtXP = ver > WV_XP;
-	if (TheFirstOne && isUpExist && doUpdate && isGtXP)
-	{
-		Process updater(updaterFullPath.c_str(), version.c_str(), updaterDir.c_str());
-		updater.run();
+	
+	//if (TheFirstOne && isUpExist && doUpdate && isGtXP)
+	//{
+	//	Process updater(updaterFullPath.c_str(), version.c_str(), updaterDir.c_str());
+	//	updater.run();
 
-        // Update next update date
-        if (nppGui._autoUpdateOpt._intervalDays < 0) // Make sure interval days value is positive
-            nppGui._autoUpdateOpt._intervalDays = 0 - nppGui._autoUpdateOpt._intervalDays;
-        nppGui._autoUpdateOpt._nextUpdateDate = Date(nppGui._autoUpdateOpt._intervalDays);
-	}
+ //       // Update next update date
+ //       if (nppGui._autoUpdateOpt._intervalDays < 0) // Make sure interval days value is positive
+ //           nppGui._autoUpdateOpt._intervalDays = 0 - nppGui._autoUpdateOpt._intervalDays;
+
+	//	//if our variable is true (_rememberSessionThroughUpdate), 
+
+ //       nppGui._autoUpdateOpt._nextUpdateDate = Date(nppGui._autoUpdateOpt._intervalDays);
+	//}
 
 	MSG msg;
 	msg.wParam = 0;
